@@ -13,8 +13,11 @@ Note: this is not production quality code. It was written in haste to quickly ex
 # Library Requirements
 
 In order to run this code, you will need to:
-* build opencv locally and include the result in build path.
-* download imageJ and add the ij.jar to the build path.
+* build opencv locally and include the result in build path. 
+    * See https://github.com/TrackerLounge/OpenCVSURF/blob/master/CompilingOpenCV/CompilingOpenCV.md
+* download imageJ and add the ij.jar to the build path. 
+    * See https://youtu.be/xc3syeTIv-k 
+    * https://github.com/TrackerLounge/TrackingAndEdgeDetection/blob/master/FastFourierTransformAndEdgeDetection.md
 
 # Potential Useful Links:
 
