@@ -1,6 +1,9 @@
 [Home Page](https://github.com/TrackerLounge/Home)
 
 
+# Youtube Video
+[![Alt text](https://github.com/TrackerLounge/TrackAndSoleComparison/blob/master/resources/slash_screen_small.jpg)](https://www.youtube.com/watch?v=dXSyIhgNh3M)
+
 # Description
 
 I experimented with an image of a track and an image of a shoe sole to see if I could match the track to the shoe sole. I tried a number of pre-processing steps to make the image of the track and shoe sole look as similar as possible (e.g. ImageJ bandpass filter, make binary, edge detection, etc.). In the experiment, I did not know what bandpass filter settings were best, so I automated the process to generated many versions of the images by varying the values. I compare resulting images using SURF. The experiment was a failure.
