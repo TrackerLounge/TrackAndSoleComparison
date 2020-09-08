@@ -5,6 +5,8 @@
 
 I experimented with an image of a track and an image of a shoe sole to see if I could match the track to the shoe sole. I tried a number of pre-processing steps to make the image of the track and shoe sole look as similar as possible (e.g. ImageJ bandpass filter, make binary, edge detection, etc.). In the experiment, I did not know what bandpass filter settings were best, so I automated the process to generated many versions of the images by varying the values. I compare resulting images using SURF. The experiment was a failure.
 
+Note: this is not production quality code. It was written in haste to quickly experiment. It has not been optimized. It is ugly rough-cut code.
+
 # Library Requirements
 
 In order to run this code, you will need to:
