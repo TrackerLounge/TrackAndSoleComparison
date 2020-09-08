@@ -1,0 +1,153 @@
+ I experimented with an image of a track and an image of a shoe sole to see if I could match the track to the shoe sole. 
+ I tried a number of pre-processing steps to make the image of the track and shoe sole look as similar as possible (e.g. ImageJ bandpass filter, make binary, edge detection, etc.). 
+ In the experiment, I did not know what bandpass filter settings were best, so I automated the process to generated many versions of the images by varying the values. 
+ I compare resulting images using SURF. The experiment was a failure.
+
+In a past video, I explored running OpenCV SURF Feature Detection
+I will leave a link in the description
+https://youtu.be/TP2QohEGAl4
+In that video, I showed how to get the code to run
+I didn’t really explore what it can and cannot do.
+In this video, I’d like to do a little of that exploration
+For the impatient, as the title implies, this video will document some failed experiments. No successes will be shown.
+
+Good Result - SURF can find a scaled and rotated version of an IDENTICAL image
+Bad Result – I’d like it to fail instead - SURF gets a bit confused when comparing a left and right foot. 
+Good Result – On raw images of tracks in sand
+Good Result – no match between left and right foot 
+
+I’m really not going to focus on the code in this video.
+
+For those interested in the Java code, I will post a link in the description
+https://github.com/TrackerLounge/TrackAndSoleComparison 
+Note: this is not production quality code. It was intended for rough experimentation
+Note: this code is simplistic. It looks for the highest number of feature matches without evaluating the quality of those matches.
+
+For those interested in this topic, I’d recommend checking out CSAFE forensicstats youtube video:
+A Generative Approach to Forensic Shoeprint Recognition"- February 10, 2017 by Adam Kortylewski
+No relation. Saw the video and learned a lot.
+Adam’s approach produces good results with real-world images
+https://www.youtube.com/watch?v=mPY8G-tCS1U 
+
+Imagine you have:
+ - an image of track
+ - a collection of images of shoe soles
+Can you write an image processing pipeline to compare the track with each of the soles and tell you the shoe sole that is most similar to the track?
+Will the SURF algorithm work well for this problem?
+
+These results are bad.
+Can we do better?
+These results are pretty terrible. Can we do better?
+What if we had a better image of the track?
+
+Digitize a Track Using Photogrammetry
+https://youtu.be/6clAcxvFLSM
+
+Using photogrammetry, we could create a 3D model of the track and color it along the Z-axis to improve contrast, edge detection, etc.
+I will put links in the description on how this was done
+https://github.com/TrackerLounge/TrackingAndPhotogrammetry
+
+OpenCV(4.4.0-dev) Error: Assertion failed (scn + 1 == m.cols) in cv::perspectiveTransform, file D:\opt\opencv\workspace\opencv\modules\core\src\matmul.dispatch.cpp, line 531
+Exception in thread "main" CvException [org.opencv.core.CvException: cv::Exception: OpenCV(4.4.0-dev) D:\opt\opencv\workspace\opencv\modules\core\src\matmul.dispatch.cpp:531: error: (-215:Assertion failed) scn + 1 == m.cols in function 'cv::perspectiveTransform'
+]
+
+The SURF code fails to find any matching features
+
+The SURF code fails to find any matching features.
+To add insult to injury, the OpenCV code fails with an exception
+What else could we try?
+Can we make them look more similar?
+
+Original Track Image
+Bandpass Filter
+Make Binary
+Edge Detection
+
+Original Sole Image
+Bandpass Filter
+Make Binary
+Edge Detection
+
+I experimented in ImageJ, with the following pipeline
+FFT Bandpass filter both images
+Make Binary both images
+Edge Detect on both images.
+
+Images in ImageJ
+Original 
+Images
+
+We will do the same things on both images
+Result of FFT Bandpass Filter
+Result of Make Binary
+Result of Edge Detection
+
+If we compare these two edge images, we can foresee some problems in the future of this experiment.
+Notice how the perspective of the camera allows us to see the side-walls of canyons in the Shoe Sole image the closer we move towards the toe or heal area.
+As a result, the Shoe Sole does not have closing lines on prominent knobby features. 
+Perhaps this is due to the image conversion to grayscale during edge detection.
+
+These results are bad. 
+What else can we try?
+
+ImageJ FFT Bandpass has several settings that can create very different results. 
+You can think of this as changing the lenses focus of a camera, to see larger or finer details in an image.
+Perhaps varying the settings would produce a better result? 
+But what  settings are best? 
+
+We will focus on:
+Filter large structures down to N pixels
+Filter small structures up to M pixels
+For a description of these to fields and how the appear to behave see the link in the description:
+https://github.com/TrackerLounge/TrackingAndEdgeDetection/blob/master/FastFourierTransformAndEdgeDetection.md 
+
+Let’s automate it and try a bunch?
+In a prior video I showed how to run ImageJ code in a Java project.
+I will include a link in the description
+https://youtu.be/xc3syeTIv-k 
+
+Run the java code in Eclipse to generate 19 versions of images.
+
+We now have 19 versions of the track image and the shoe sole image.
+What if we compare the two sets of images using SURF?
+Will we get a usable result?
+Each SURF comparison takes about 1 second
+We have 19 versions of each image, or 19x19 = 361 comparisons to make 
+The test takes 6 minutes to run.
+
+The Results are Bad
+Many SURF Features in one image are all mapping to a single Feature in the second image  
+
+I repeated this experiment with 180 versions of each image
+This resulted in 32,360 comparisons and took my machine ~8 hours to run. As stated earlier – this is unoptimized experimental code.
+The results were just as bad as before.
+I tried inverting one image or the other, and regenerating multiple versions to compare. 
+The results were just as bad as before.
+I tried not edge detecting the Bandpassed Binary images.
+The results were just as bad as before.
+
+Stock Image found in Advertisement online
+
+My Image (Should have cleaned it)
+
+As a final parting blow, I decided to compare a stock image my shoe’s sole found online vs my own image of my shoe’s sole.
+The result are bad
+
+Comparing one image to the other
+Comparing 19 versions of one image with 19 versions of the other
+
+Conclusions
+No it will not match
+SURF or my usage of SURF, does not appear to be the right tool to find image similarity in this case.
+More research is needed
+
+
+
+
+
+
+
+
+
+
+
