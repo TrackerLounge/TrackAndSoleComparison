@@ -25,6 +25,9 @@ https://opencv-java-tutorials.readthedocs.io/en/latest/01-installing-opencv-for-
 
 # Image Comparison
 
+Awesome class on Feature Descriptors and SIFT/SURF
+https://www.youtube.com/watch?v=oFVexhcltzE&t=870s
+
 https://stackoverflow.com/questions/11541154/checking-images-for-similarity-with-opencv
 
 https://docs.opencv.org/4.4.0/d7/dff/tutorial_feature_homography.html
